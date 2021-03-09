@@ -1,0 +1,12 @@
+services:
+  ai_checkers:
+    build:
+      context: /home/brandonodiwuor/vue/checkers
+      dockerfile: docker/Dockerfile
+    container_name: ai_checkers_container
+    image: ai_checkers_img
+    ports:
+    - 8080:8080/tcp
+    restart: always
+version: '3.8'
+

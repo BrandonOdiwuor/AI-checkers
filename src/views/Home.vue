@@ -1,15 +1,13 @@
 <template>
-  <Home />
+  <Board />
 </template>
-
 <script lang="ts">
+import Board from "@/components/Board.vue";
 import { defineComponent } from "vue";
-import Home from "./views/Home.vue";
 
 export default defineComponent({
-  name: "App",
   components: {
-    Home
+    Board
   }
 });
 </script>

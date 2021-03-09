@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  ai_checkers:
+    container_name: ai_checkers_container
+    image: ai_checkers_img
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    restart: "always"
