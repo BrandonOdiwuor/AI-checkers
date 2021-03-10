@@ -58,7 +58,10 @@ export default {
             [selectedRow.value, selectedColumn.value],
             [row, column]
           );
-          console.log(position.currentPlayer);
+          console.log(
+            "current player: ",
+            position.currentPlayer === 1 ? "white" : "black"
+          );
         }
         [selectedRow.value, selectedColumn.value] = [-1, -1];
       } else {

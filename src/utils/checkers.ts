@@ -85,6 +85,16 @@ const getCaptureMove = (
   return move;
 };
 
+/**
+ * Determines whether a move from [row, column] to [moveRow, moveColumn]
+ * is a valid Jump move
+ * @param {Board} board - current board state
+ * @param {number} row - The row with the piece to be moved
+ * @param {number} column - The column with the piece to be moved
+ * @param {number} moveRow - Target row
+ * @param {number} moveColumn - Target column
+ * @returns a boolean indicating if the move is valid jumpmove
+ */
 const isCaptureMove = (
   board: Board,
   [row, column]: [number, number],
@@ -101,15 +111,13 @@ const isCaptureMove = (
       (moveRow + row) / 2,
       (moveColumn + column) / 2
     ];
-    console.log("exec", row + 2 * playerPiece[0] === moveRow);
     if (
       row + 2 * playerPiece[0] === moveRow &&
       Math.abs(moveColumn - column) == 2 &&
       board[captureRow][captureColumn][0] &&
-      board[captureRow][captureRow][1] != null
+      board[captureRow][captureColumn][1] != null
     ) {
-      console.log("execute");
-      const opponentPiece = board[captureRow][captureRow][1] as Piece;
+      const opponentPiece = board[captureRow][captureColumn][1] as Piece;
       return playerPiece[0] != opponentPiece[0];
     }
   }
@@ -144,6 +152,14 @@ const FindMoveList = (
   return moves;
 };
 
+/**
+ * Generates the resulting Board position from the Jump move
+ * @param position - Original Game state (board position)
+ * @param {number} row - The row with the piece to be moved
+ * @param {number} column - The column with the piece to be moved
+ * @param {number} move - Move to execute
+ * @returns new Board positon after executing the jump move
+ */
 const positionFromCaptureMove = (
   position: Position,
   [row, column]: [number, number],
@@ -171,14 +187,19 @@ const positionFromCaptureMove = (
   }
 };
 
+/**
+ * Computes the resulting Board Position(Game state) from proposed move
+ * @param {Position} position - current game state
+ * @param {number} row - The row with the piece to be moved
+ * @param {number} column - The column with the piece to be moved
+ * @param {number} move - Move to execute
+ * @returns a new Board position after executing the move
+ */
 const positionFromMove = (
   position: Position,
   [row, column]: [number, number],
   move: Move
 ): Position => {
-  console.log(
-    (position.board[row][column][1] as Piece)[0] === position.currentPlayer
-  );
   if (
     position.board[row][column][0] &&
     position.board[row][column][1] &&
@@ -187,7 +208,6 @@ const positionFromMove = (
     if (move[0][1]) {
       position = positionFromCaptureMove(position, [row, column], move);
     } else {
-      console.log("movinga");
       const [moveRow, moveColumn]: [number, number] = [
         move[0][0][0],
         move[0][0][1]
@@ -299,19 +319,28 @@ export const generateBoard = (
   return board;
 };
 
+/**
+ * Generates a move and the resulting Board position from
+ * the move {[row, column] to [moveRow, moveColumn]}
+ * @param position - The state of the Game
+ * @param {number} row - The row with the piece to be moved
+ * @param {number} column - The column with the piece to be moved
+ * @param {number} moveRow - Target row
+ * @param {number} moveColumn - Target column
+ * @returns new Board position from the move
+ */
 export const movePiece = (
   position: Position,
   [row, column]: [number, number],
   [moveRow, moveColumn]: [number, number]
 ): Position => {
-  //   const move: Move = isCaptureMove(
-  //     position.board,
-  //     [row, column],
-  //     [moveRow, moveColumn]
-  //   )
-  //     ? [[[moveRow, moveColumn], true]]
-  //     : [[[moveRow, moveColumn], false]];
-  const move: Move = [[[moveRow, moveColumn], false]];
+  const move: Move = isCaptureMove(
+    position.board,
+    [row, column],
+    [moveRow, moveColumn]
+  )
+    ? [[[moveRow, moveColumn], true]]
+    : [[[moveRow, moveColumn], false]];
   return positionFromMove(position, [row, column], move);
 };
 
