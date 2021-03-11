@@ -7,8 +7,8 @@
           :key="columnIndex"
           class="cell"
           :class="{
-            activeCell: cell[0]
-            /*selectedCell: cell.piece && cell.piece.isSelected*/
+            activeCell: cell[0],
+            selectedCell: cell[2]
           }"
           @click="selectCell(rowIndex, columnIndex)"
         >
@@ -66,6 +66,7 @@ export default {
         [selectedRow.value, selectedColumn.value] = [-1, -1];
       } else {
         [selectedRow.value, selectedColumn.value] = [row, column];
+        position.board[row][column][2] = true;
       }
     }
 

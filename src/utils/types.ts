@@ -15,8 +15,9 @@ type Piece = [Player, boolean];
  * @typedef {[boolean, Piece | null]} Cell - Represents a cell on the checkers board
  * @member {boolean} validCell - a boolean indicating whether the cell is blocked(false) or playable(true)
  * @member {Piece | null} - Indicates whether a cell contains a Piece or isEmpty(null)
+ * @member {boolean} isSelected - a boolean indicating whether a cell has been selected
  */
-type Cell = [boolean, Piece | null];
+type Cell = [boolean, Piece | null, boolean];
 
 /**
  * @typedef {Cell[][]} Board - Reperesent a checkers board

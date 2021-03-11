@@ -170,11 +170,12 @@ const positionFromCaptureMove = (
     const [[captureRow, captureColumn]]: [[number, number], boolean] = miniMove;
     const piece: Piece = position.board[row][column][1] as Piece;
     if (captureRow === 7) piece[1] = true; // Crowning king piece
-    position.board[captureRow][captureColumn] = [true, piece]; // Move piece to capture cell
-    position.board[row][column] = [true, null];
+    position.board[captureRow][captureColumn] = [true, piece, false]; // Move piece to capture cell
+    position.board[row][column] = [true, null, false];
     position.board[(row + captureRow) / 2][(column + captureColumn) / 2] = [
       true,
-      null
+      null,
+      false
     ]; // Remove oppnent piece
     if (position.currentPlayer === 1) {
       position.captures[0] += 1;
@@ -214,8 +215,8 @@ const positionFromMove = (
       ];
       const piece: Piece = position.board[row][column][1] as Piece;
       if (moveRow === 7) piece[1] = true; // Crowning king piece
-      position.board[moveRow][moveColumn] = [true, piece];
-      position.board[row][column] = [true, null];
+      position.board[moveRow][moveColumn] = [true, piece, false];
+      position.board[row][column] = [true, null, false];
     }
     position.currentPlayer = position.currentPlayer === 1 ? -1 : 1;
   }
@@ -290,6 +291,13 @@ const Max = (positions: Position[], valueFunction: MinMax): Position | null => {
 export const chosenPosition = (position: Position) =>
   Max(legalPositionsFrom(position), minMax);
 
+/**
+ * Generated a checkers board with the parameters provided
+ * @param rows - The number of rows in the board
+ * @param columns - The number of columns in the board
+ * @param playerPieces -The number of pieces to assign to each player
+ * @returns - Return a checkers board with the parameters provided
+ */
 export const generateBoard = (
   rows: number,
   columns: number,
@@ -305,14 +313,14 @@ export const generateBoard = (
         (row % 2 != 0 && column % 2 != 0)
       ) {
         if (row < piecesFilledRows) {
-          board[row][column] = [true, [1, false]];
+          board[row][column] = [true, [1, false], false];
         } else if (row >= rows - piecesFilledRows) {
-          board[row][column] = [true, [-1, false]];
+          board[row][column] = [true, [-1, false], false];
         } else {
-          board[row][column] = [true, null];
+          board[row][column] = [true, null, false];
         }
       } else {
-        board[row][column] = [false, null];
+        board[row][column] = [false, null, false];
       }
     }
   }
