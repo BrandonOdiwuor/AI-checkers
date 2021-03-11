@@ -373,7 +373,10 @@ export const moveIsValid = (
     if (
       (position.board[row][column][1] as Piece)[0] === position.currentPlayer
     ) {
-      if (Math.abs(moveRow - row) == 1 && Math.abs(moveColumn - column) == 1) {
+      if (
+        row + position.currentPlayer === moveRow &&
+        Math.abs(moveColumn - column) == 1
+      ) {
         return (
           position.board[moveRow][moveColumn][0] &&
           !position.board[moveRow][moveColumn][1]

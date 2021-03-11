@@ -63,8 +63,8 @@ export default {
             "current player: ",
             position.currentPlayer === 1 ? "white" : "black"
           );
+          [selectedRow.value, selectedColumn.value] = [-1, -1];
         }
-        [selectedRow.value, selectedColumn.value] = [-1, -1];
       } else {
         if (
           position.board[row][column][0] &&
