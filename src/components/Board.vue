@@ -1,4 +1,8 @@
 <template>
+  <div class="turn">
+    <span class="playerTurn" v-if="position.currentPlayer === 1">Your Turn</span>
+    <span v-else>Computers Turn</span>
+  </div>
   <div class="board">
     <div v-for="(row, rowIndex) in position.board" :key="rowIndex">
       <div
@@ -58,10 +62,6 @@ export default {
             position,
             [selectedRow.value, selectedColumn.value],
             [row, column]
-          );
-          console.log(
-            "current player: ",
-            position.currentPlayer === 1 ? "white" : "black"
           );
           [selectedRow.value, selectedColumn.value] = [-1, -1];
         }

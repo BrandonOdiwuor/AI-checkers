@@ -1,3 +1,14 @@
+.turn {
+  text-align: center;
+  font-weight: bold;
+  margin: 0.5em;
+}
+
+.playerTurn {
+  color: red;
+}
+
+
 .activeCell {
   background-color: rgb(163, 113, 47);
 }
