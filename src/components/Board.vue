@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { reactive, ref, Ref } from "vue";
-import { Position } from "../utils/types";
+import { Piece, Position } from "../utils/types";
 import { generateBoard, movePiece, moveIsValid } from "../utils/checkers";
 export default {
   setup() {
@@ -46,7 +46,10 @@ export default {
 
     function selectCell(row: number, column: number) {
       if (selectedRow.value >= 0 && selectedColumn.value >= 0) {
-        if (
+        if (row === selectedRow.value && column === selectedColumn.value) {
+          [selectedRow.value, selectedColumn.value] = [-1, -1];
+          position.board[row][column][2] = false;
+        } else if (
           moveIsValid(
             position,
             [selectedRow.value, selectedColumn.value],
@@ -65,8 +68,15 @@ export default {
         }
         [selectedRow.value, selectedColumn.value] = [-1, -1];
       } else {
-        [selectedRow.value, selectedColumn.value] = [row, column];
-        position.board[row][column][2] = true;
+        if (
+          position.board[row][column][0] &&
+          position.board[row][column][1] &&
+          (position.board[row][column][1] as Piece)[0] ===
+            position.currentPlayer
+        ) {
+          [selectedRow.value, selectedColumn.value] = [row, column];
+          position.board[row][column][2] = true;
+        }
       }
     }
 
