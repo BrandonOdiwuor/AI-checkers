@@ -1,5 +1,5 @@
 .activeCell {
-  background-color: gray;
+  background-color: rgb(163, 113, 47);
 }
 
 .board {
@@ -15,8 +15,8 @@
 }
 
 .isWhite {
-  background-color: white;
-  box-shadow: 0 1.5px 3px black;
+  background-color: red;
+  box-shadow: 0 1.5px 3px white;
 }
 
 .isBlack {
