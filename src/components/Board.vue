@@ -19,7 +19,7 @@
               isBlack: cell[0] && cell[1] && cell[1][0] === -1
             }"
           >
-            {{ rowIndex }}, {{ columnIndex }}
+            <!-- {{ rowIndex }}, {{ columnIndex }} -->
           </div>
         </div>
       </div>
@@ -86,43 +86,5 @@ export default {
 </script>
 
 <style>
-.activeCell {
-  background-color: gray;
-}
-.board {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  justify-content: center;
-}
-
-.board > div {
-  /* border: 1px solid #777; */
-  /* box-shadow: 0 10px 6px -6px #777; */
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-}
-
-.cell {
-  padding: 1em;
-}
-
-.piece {
-  height: 2.5em;
-  width: 2.5em;
-  border-radius: 50%;
-  /* background-color: black; */
-}
-
-.isWhite {
-  background-color: white;
-  box-shadow: 0 1.5px 3px black;
-}
-
-.isBlack {
-  background-color: black;
-  box-shadow: 0 1.5px 3px white;
-}
-
-.selectedCell {
-  background-color: green;
-}
+@import "../assets/css/checkers.css";
 </style>
