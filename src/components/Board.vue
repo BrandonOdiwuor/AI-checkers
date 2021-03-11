@@ -14,7 +14,7 @@
         <div
           class="piece"
           :class="{
-            isWhite: cell[0] && cell[1] && cell[1][0] === 1,
+            isRed: cell[0] && cell[1] && cell[1][0] === 1,
             isBlack: cell[0] && cell[1] && cell[1][0] === -1
           }"
         >
