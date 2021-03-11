@@ -1,7 +1,9 @@
 <template>
   <div class="turn">
-    <span class="playerTurn" v-if="position.currentPlayer === 1">Your Turn</span>
-    <span v-else>Computers Turn</span>
+    <span class="playerTurn" v-if="position.currentPlayer === 1"
+      >Your Turn</span
+    >
+    <span v-else>Computer's Turn</span>
   </div>
   <div class="board">
     <div v-for="(row, rowIndex) in position.board" :key="rowIndex">
@@ -37,7 +39,7 @@ export default {
   setup() {
     let position: Position = reactive({
       board: generateBoard(8, 8, 12),
-      currentPlayer: 1,
+      currentPlayer: Math.random() < 0.5 ? 1 : -1,
       captures: [0, 0]
     });
     // let board: Board = reactive(generateBoard(8, 8, 12));
