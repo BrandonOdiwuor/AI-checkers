@@ -1,26 +1,24 @@
 <template>
-  <div>
-    <div class="board">
-      <div v-for="(row, rowIndex) in position.board" :key="rowIndex">
+  <div class="board">
+    <div v-for="(row, rowIndex) in position.board" :key="rowIndex">
+      <div
+        v-for="(cell, columnIndex) in row"
+        :key="columnIndex"
+        class="cell"
+        :class="{
+          activeCell: cell[0],
+          selectedCell: cell[2]
+        }"
+        @click="selectCell(rowIndex, columnIndex)"
+      >
         <div
-          v-for="(cell, columnIndex) in row"
-          :key="columnIndex"
-          class="cell"
+          class="piece"
           :class="{
-            activeCell: cell[0],
-            selectedCell: cell[2]
+            isWhite: cell[0] && cell[1] && cell[1][0] === 1,
+            isBlack: cell[0] && cell[1] && cell[1][0] === -1
           }"
-          @click="selectCell(rowIndex, columnIndex)"
         >
-          <div
-            class="piece"
-            :class="{
-              isWhite: cell[0] && cell[1] && cell[1][0] === 1,
-              isBlack: cell[0] && cell[1] && cell[1][0] === -1
-            }"
-          >
-            <!-- {{ rowIndex }}, {{ columnIndex }} -->
-          </div>
+          <!-- {{ rowIndex }}, {{ columnIndex }} -->
         </div>
       </div>
     </div>
@@ -84,7 +82,3 @@ export default {
   }
 };
 </script>
-
-<style>
-@import "../assets/css/checkers.css";
-</style>

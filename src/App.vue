@@ -13,3 +13,6 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+@import "./assets/css/checkers.css";
+</style>
